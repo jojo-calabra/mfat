@@ -8,8 +8,12 @@ In simple terms this program lets you take training drills and generates detaile
 IMPORTANT — THIS PROGRAM IS STILL IN A VERY EARLY STAGE OF DEVELOPMENT. PLEASE LET US KNOW ABOUT ANY BUGS OR FEATURES THAT YOU WOULD LIKE TO BE ADDED IN THE ('ISSUES')[https://github.com/jojo-calabra/mfat/issues] PAGE.
 
 The core principles for the applied learning methods are:
-- Visual clues
-- Multimedia Approach
+- Learning by doing
+- Problem solving and critical thinking
+- Multimedia Approach / Visual clues
+- Collaborative and cooperative learning
+- Selection of subject content based on individual performance history
 - ICT Enabled Learning / Digital Learning
 - Spaced Repetition Learning
 - Reward discovery / Reinforcement Learning
+- Memory Learning / Memorizing
