@@ -6,7 +6,7 @@ It was created out of a struggle to prepare for our final exams properly while g
 
 In simple terms this program lets you take training drills and generates detailed statistics about your performance.
 
-IMPORTANT — THIS PROGRAM IS STILL IN A VERY EARLY STAGE OF DEVELOPMENT. PLEASE LET US KNOW ABOUT ANY BUGS OR FEATURES THAT YOU WOULD LIKE TO BE ADDED IN THE [ISSUES](https://github.com/jojo-calabra/mfat/issues) PAGE.
+IMPORTANT — THIS PROGRAM IS STILL IN A VERY EARLY STAGE OF DEVELOPMENT. PLEASE LET US KNOW ABOUT ANY BUGS OR MISSING FEATURES THAT YOU WOULD LIKE TO BE ADDED, IN OUR [ISSUES](https://github.com/jojo-calabra/mfat/issues) PAGE.
 
 The core principles for the applied learning methods are:
 - Learning by doing
