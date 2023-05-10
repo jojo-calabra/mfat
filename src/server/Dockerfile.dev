@@ -1,0 +1,21 @@
+# Use the official golang image as a parent image. (https://hub.docker.com/_/golang/)
+FROM golang:latest
+
+# Add maintainer info
+LABEL maintainer="Jojo Calabra"
+
+# Set the working directory.
+WORKDIR /app
+
+# Copy the source files into the container.
+COPY go.mod go.sum ./
+COPY . .
+
+# Download all dependencies. Dependencies will be cached if the go.mod and the go.sum files are not changed
+RUN go mod download
+
+# Build the Go app
+RUN go build -o main .
+
+# Run the Go app executable
+CMD ["./main"]

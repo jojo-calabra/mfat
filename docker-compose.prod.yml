@@ -1,0 +1,33 @@
+version: "3.9"
+
+# PRODUCTION
+services:
+  vue3-app:
+    container_name: mfat-server
+    image: REGISTRY/vue3-app:latest # TODO Create image & registry, this would pull the image from the registry
+    restart: always
+    ports:
+      - "80:80" # map container port 80 to host port 80
+    depends_on:
+      - go-server
+    env_file:
+      - .env.prod # load environment variables from .env.prod
+  go-server:
+    container_name: mfat-app
+    image: REGISTRY/go-server:latest # TODO Create image & registry, this would pull the image from the registry
+    restart: always
+    ports:
+      - "8080:8080" # map container port 8080 to host port 8080
+    depends_on:
+      - postgresql-db
+    env_file:
+      - .env.prod # load environment variables from .env.prod
+  postgresql-db:
+    container_name: mfat-db
+    image: postgres:13-alpine
+    env_file:
+      - .env.prod # load environment variables from .env.prod
+    restart: always
+    volumes:
+      - ./src/db/postgres_data:/var/lib/postgresql/data
+      - ./src/db/migrations:/docker-entrypoint-initdb.d/

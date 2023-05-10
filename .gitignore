@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+.env.prod
+.env
+*deployment.yml
+src/app/package-lock.json

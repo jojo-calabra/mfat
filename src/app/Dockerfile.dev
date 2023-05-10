@@ -1,0 +1,18 @@
+# Use the official node image as a parent image (https://hub.docker.com/_/node/)
+FROM node:latest
+
+# Add maintainer info
+LABEL maintainer="Jojo Calabra"
+
+# Set the working directory.
+WORKDIR /app
+
+# Copy the source files into the container.
+COPY . ./
+COPY package*.json ./
+
+# Download all dependencies. Dependencies will be cached if the package.json and package-lock.json files are not changed
+RUN npm install
+
+# Run the vue3.js app
+CMD ["npm", "run", "dev"]
