@@ -1,0 +1,54 @@
+version: "1.0" # Public alpha
+
+# DEVELOPENT — INTENDED FOR DEVELOPMENT ONLY, FOR PRODUCTION SEE "DOCKER-COMPOSE.PROD.YML" (unfinished)
+services:
+# Host-Port 8080 for the Vue3 app (Frontend). Host-Port 59321 for the Go server (Backend). Host-Port 64298 for the Postgres DB.
+  vue3-app:
+    container_name: mfat-server
+    build:
+      context: src/app
+      dockerfile: Dockerfile.dev
+    ports:
+      # Ports are loaded from the .env. If no port was specified, default values are used
+      - "${GO_SERVER_PORT_DOCKER:-56123}:${GO_SERVER_PORT_HOST:-8080}"
+    volumes:
+      - ./src/app:/app
+      - ./src/app/node_modules:/app/node_modules
+    depends_on:
+      - postgresql-db
+      - go-server
+  go-server:
+    container_name: mfat-app
+    build:
+      context: src/server
+      dockerfile: Dockerfile.dev
+    ports:
+      # Ports are loaded from the .env. If no port was specified, default values are used
+      - "${GO_SERVER_PORT_DOCKER:-59321}:${GO_SERVER_PORT_HOST:-59321}"
+    depends_on:
+      - postgresql-db
+  postgresql-db:
+    container_name: mfat-db
+    image: postgres:13-alpine
+    env_file:
+      - .env # CREDENTAILS FOR THE DB ARE STORED IN THIS FILE. DERIVE CONTENTS FROM .env.example
+    build:
+      context: src/db
+      dockerfile: Dockerfile.dev
+    ports:
+      # Ports are loaded from the .env. If no port was specified, default values are used
+      - "${POSTGRESQL_DB_PORT_DOCKER:-64298}:${POSTGRESQL_DB_PORT_HOST:-64298}"
+    volumes:
+      # Postgres data volume will persist the data in the database
+      - ./src/db/postgres_data:/var/lib/postgresql/data # REMOVE THIS LINE IF YOU WANT TO START FRESH EVERY TIME (HANDY FOR DB TESTING)
+      # Migrations volume will cause any SQL files in the "migrations" directory to be executed when the container starts up.
+      - ./src/db/migrations:/docker-entrypoint-initdb.d/
+  migrations: # This container will apply the migrations continously
+    volumes:
+      # Changes to the migration files in this directory will trigger the migration process
+      - ./src/db/migrations:/migrations
+    command: sh -c 'while ! nc -z db 64298; do sleep 1; done; migrate -path=/migrations/ -database postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:64298/${POSTGRES_DB} up'
+    depends_on:
+      - postgresql-db
+
+  # TODO @isoeli Create a container for the knowledge wiki if needed something like 'outline' will do (which you recommended, right?)
