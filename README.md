@@ -1,5 +1,4 @@
 # MFAT 🧘
-
 MFAT — My Friend and Teacher is a program designet to make learning more entertaining and effective.
 
 It was created out of a struggle to prepare for our final exams properly while getting feedback on our performance and hints about where we could improve, without totally hoging all of the schools/teachers resources.
