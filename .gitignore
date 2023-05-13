@@ -35,3 +35,4 @@
 *deployment.yml
 src/app/package-lock.json
 doc/UI/.$*
+.vscode/settings.json
