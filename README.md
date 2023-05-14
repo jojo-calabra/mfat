@@ -7,7 +7,7 @@ It was created out of a struggle to prepare for our final exams properly while g
 In simple terms this program lets you take training drills and generates detailed statistics about your performance.
 
 <p align="center">
-  <a href="https://badgen.net/github/merged-prs/jojo-calabra/mfat"><img src="https://github.com/jojo-calabra/mfat/pulls?q=is%3Amerged"></a>
+<!--   <a href="https://badgen.net/github/merged-prs/jojo-calabra/mfat"><img src="https://github.com/jojo-calabra/mfat/pulls?q=is%3Amerged"></a> -->
   <a href="https://GitHub.com/jojo-calabra/mfat/graphs/contributors/"><img src="https://img.shields.io/github/contributors/jojo-calabra/mfat.svg"></a>
   <a href="https://github.com/jojo-calabra/mfat/issues"><img src="https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat"></a>
   <a href="https://hits.dwyl.com/jojo-calabra/mfat"><img src="https://hits.dwyl.com/jojo-calabra/mfat.svg"></a>
