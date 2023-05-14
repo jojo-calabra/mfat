@@ -1,0 +1,24 @@
+{
+	"recommendations": [
+        "esbenp.prettier-vscode",
+		"ms-vscode.cmake-tools",
+        "golang.go",
+        "uniquevision.vscode-plpgsql-lsp",
+        "eamodio.gitlens",
+        "GregorBiswanger.json2ts",
+        "codezombiech.gitignore",
+        "formulahendry.auto-rename-tag",
+        "christian-kohler.path-intellisense",
+        "syler.sass-indented",
+        "sibiraj-s.vscode-scss-formatter",
+        "rafamel.subtle-brackets",
+        "Gruntfuggly.todo-tree",
+        "loiane.ts-extension-pack",
+        "Vue.vscode-typescript-vue-plugin",
+        "vscode-icons-team.vscode-icons",
+        "Vue.volar",
+        "tomoki1207.pdf",
+        "psaren.vue3-composition-snippets",
+        "wejectchan.vue3-snippets-for-vscode"
+	]
+}
