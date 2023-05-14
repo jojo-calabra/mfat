@@ -81,8 +81,7 @@ We support and use these projects.
 You know what to do: Check them out and give their repositories a star, the y deserve it
 
 First of all we use a large set of crow http functions, so thanks to the crow team for developing an amazing library!
-https://github.com/CrowCpp/Crow
-
+- [Wikipedia — Progressive Education](https://github.com/CrowCpp/Crow)
 
 # Security Policy for Production-Ready code 🛡️
 
