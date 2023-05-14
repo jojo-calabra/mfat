@@ -7,9 +7,6 @@ It was created out of a struggle to prepare for our final exams properly while g
 In simple terms this program lets you take training drills and generates detailed statistics about your performance.
 
 <p align="center">
-  
-  <a href=""><img src=""></a>
-  
   <a href="https://badgen.net/github/merged-prs/jojo-calabra/mfat"><img src="https://github.com/jojo-calabra/mfat/pulls?q=is%3Amerged"></a>
   <a href="https://GitHub.com/jojo-calabra/mfat/graphs/contributors/"><img src="https://img.shields.io/github/contributors/jojo-calabra/mfat.svg"></a>
   <a href="https://github.com/jojo-calabra/mfat/issues"><img src="https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat"></a>
@@ -20,30 +17,22 @@ In simple terms this program lets you take training drills and generates detaile
 </p>
 
 # News 
-<p align="center">
 ![Courses page wireframe draft](https://github.com/jojo-calabra/mfat/blob/main/doc/UI/MFAT%20Wireframe%20%E2%80%94%20Courses.jpg)
 
 ![MFAT DB ERD draft](https://github.com/jojo-calabra/mfat/blob/main/doc/UML/ERDDiagram1.jpg)
 
 # Environment
 
-![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)
-
-![Kubernetes](https://img.shields.io/badge/kubernetes-%23326ce5.svg?style=for-the-badge&logo=kubernetes&logoColor=white)
-
-![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
-
-![CMake](https://img.shields.io/badge/CMake-%23008FBA.svg?style=for-the-badge&logo=cmake&logoColor=white)
-
-![C++](https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white)
-
-![NPM](https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white)
-
-![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)
-
-![Vue.js](https://img.shields.io/badge/vuejs-%2335495e.svg?style=for-the-badge&logo=vuedotjs&logoColor=%234FC08D)
-
-![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
+<p align="center">
+  <a href=""><img src="https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white"></a>
+  <a href=""><img src="https://img.shields.io/badge/kubernetes-%23326ce5.svg?style=for-the-badge&logo=kubernetes&logoColor=white"></a>
+  <a href=""><img src="https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white"></a>
+  <a href=""><img src="https://img.shields.io/badge/CMake-%23008FBA.svg?style=for-the-badge&logo=cmake&logoColor=white"></a>
+  <a href=""><img src="https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white"></a>
+  <a href=""><img src="https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white"></a>
+  <a href=""><img src="https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white"></a>
+  <a href=""><img src="https://img.shields.io/badge/vuejs-%2335495e.svg?style=for-the-badge&logo=vuedotjs&logoColor=%234FC08D"></a>
+  <a href=""><img src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white"></a>
 </p>
   
   
