@@ -1,16 +1,25 @@
 # MFAT 🧘
 
-![Courses page wireframe draft](https://github.com/jojo-calabra/mfat/blob/main/doc/UI/MFAT%20Wireframe%20%E2%80%94%20Courses.jpg)
-
-![MFAT DB ERD draft](https://github.com/jojo-calabra/mfat/blob/main/doc/UML/ERDDiagram1.jpg)
-
 MFAT — My Friend and Teacher is a free & open-source (FOSS) application, designed to make learning more entertaining and effective.
 
 It was created out of a struggle to prepare for our final exams properly while getting feedback on our performance and hints about where we could improve, without totally hoging all of the schools/teachers resources.
 
 In simple terms this program lets you take training drills and generates detailed statistics about your performance.
 
-# Development Schedule
+<p align="center">
+  <a href="https://github.com/jojo-calabra/mfat"><img src="https://img.shields.io/github/stars/jojo-calabra/mfat?label=github%20stars"></a>
+  <a href="https://github.com/airbytehq/airbyte/releases" target="_blank"><img src="https://img.shields.io/github/v/release/jojo-calabra/mfat?color=white" alt="Release"></a>
+  <a href="https://www.gnu.org/licenses/gpl-3.0"><img src="https://img.shields.io/badge/License-GPLv3-blue.svg"></a>
+<p>
+
+# News 
+
+![Courses page wireframe draft](https://github.com/jojo-calabra/mfat/blob/main/doc/UI/MFAT%20Wireframe%20%E2%80%94%20Courses.jpg)
+
+![MFAT DB ERD draft](https://github.com/jojo-calabra/mfat/blob/main/doc/UML/ERDDiagram1.jpg)
+
+
+# Development Schedule (Estimates)
 
 IMPORTANT — THIS PROGRAM IS STILL IN A VERY EARLY STAGE OF DEVELOPMENT. PLEASE LET US KNOW ABOUT ANY BUGS OR MISSING FEATURES THAT YOU WOULD LIKE TO BE ADDED, IN OUR [ISSUES](https://github.com/jojo-calabra/mfat/issues) PAGE.
 
