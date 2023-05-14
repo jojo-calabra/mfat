@@ -1,0 +1,17 @@
+# Use the official golang image as a parent image. (https://hub.docker.com/_/golang/)
+FROM cmake:latest
+
+# Add maintainer info
+LABEL maintainer="Jojo Calabra"
+
+# Set the working directory.
+WORKDIR /app
+
+# Copy the source files into the container.
+COPY . .
+
+# Build the C++ app using cmake
+RUN 
+
+# Run the C++ server executable
+CMD ["./main"]
