@@ -1,4 +1,4 @@
-# MFAT 🧘
+# MFAT 🪷
 
 MFAT — My Friend and Teacher is a free & open-source (FOSS) application, designed to make learning more entertaining and effective.
 
