@@ -74,6 +74,16 @@ If you're asking yourself "What were those guys thinking about when creating thi
 
 [Let us know ](https://github.com/jojo-calabra/mfat/issues) if any of these links stopped working!
 
+
+# Libraries used and special thanks
+
+We support and use these projects. 
+You know what to do: Check them out and give their repositories a star, the y deserve it
+
+First of all we use a large set of crow http functions, so thanks to the crow team for developing an amazing library!
+https://github.com/CrowCpp/Crow
+
+
 # Security Policy for Production-Ready code 🛡️
 
 🚀 Stay safe and report any incidents or recommendations to the core team. If you should feel that these measures are unwarranted, open a new issue and let us know about it. 🚀
