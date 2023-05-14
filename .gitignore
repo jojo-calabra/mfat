@@ -36,3 +36,8 @@
 src/app/package-lock.json
 doc/UI/.$*
 .vscode/settings.json
+
+# Build time Credentials
+src/api_server_cpp/build/.env
+# CMake build files
+src/api_server_cpp/build/*
