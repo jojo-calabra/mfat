@@ -4,8 +4,9 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
-                "${workspaceFolder}/src/api_server_cpp/build/_deps/crow-src/include",
-                "${workspaceFolder}/src/api_server_cpp/build/_deps/asio-src/asio/include"
+                "${workspaceFolder}/build/_deps/crow-src/include",
+                "${workspaceFolder}/build/_deps/asio-src/asio/include",
+                "${workspaceFolder}/build/_deps/libpqxx-src/include"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/clang",
