@@ -1,54 +1,84 @@
-version: "1.0" # Public alpha
+version: "3.9"
 
 # DEVELOPENT — INTENDED FOR DEVELOPMENT ONLY, FOR PRODUCTION SEE "DOCKER-COMPOSE.PROD.YML" (unfinished)
 services:
-# Host-Port 8080 for the Vue3 app (Frontend). Host-Port 59321 for the Go server (Backend). Host-Port 64298 for the Postgres DB.
-  vue3-app:
-    container_name: mfat-server
-    build:
-      context: src/app
-      dockerfile: Dockerfile.dev
-    ports:
-      # Ports are loaded from the .env. If no port was specified, default values are used
-      - "${GO_SERVER_PORT_DOCKER:-56123}:${GO_SERVER_PORT_HOST:-8080}"
-    volumes:
-      - ./src/app:/app
-      - ./src/app/node_modules:/app/node_modules
-    depends_on:
-      - postgresql-db
-      - go-server
-  go-server:
-    container_name: mfat-app
-    build:
-      context: src/server
-      dockerfile: Dockerfile.dev
-    ports:
-      # Ports are loaded from the .env. If no port was specified, default values are used
-      - "${GO_SERVER_PORT_DOCKER:-59321}:${GO_SERVER_PORT_HOST:-59321}"
-    depends_on:
-      - postgresql-db
-  postgresql-db:
-    container_name: mfat-db
-    image: postgres:13-alpine
+  db-postgresql:
+    container_name: mfat-db-postgresql
+    image: postgres:latest
     env_file:
-      - .env # CREDENTAILS FOR THE DB ARE STORED IN THIS FILE. DERIVE CONTENTS FROM .env.example
-    build:
-      context: src/db
-      dockerfile: Dockerfile.dev
+      - .env # CREDENTAILS FOR THE DB, etc.
     ports:
       # Ports are loaded from the .env. If no port was specified, default values are used
-      - "${POSTGRESQL_DB_PORT_DOCKER:-64298}:${POSTGRESQL_DB_PORT_HOST:-64298}"
+      - "${DB_POSTGRESQL_PORT_DOCKER:-64298}:${DB_POSTGRESQL_PORT_HOST:-64298}"
     volumes:
       # Postgres data volume will persist the data in the database
-      - ./src/db/postgres_data:/var/lib/postgresql/data # REMOVE THIS LINE IF YOU WANT TO START FRESH EVERY TIME (HANDY FOR DB TESTING)
+      - ./src/db_postgresql/postgres_data:/var/lib/postgresql/data:rw # REMOVE THIS LINE IF YOU WANT TO START FRESH EVERY TIME (HANDY FOR DB TESTING)
       # Migrations volume will cause any SQL files in the "migrations" directory to be executed when the container starts up.
-      - ./src/db/migrations:/docker-entrypoint-initdb.d/
-  migrations: # This container will apply the migrations continously
+      - ./src/db_postgresql/migrations:/docker-entrypoint-initdb.d/:ro
+    stop_grace_period: 500ms
+    networks:
+      - db-network
+
+  db-postgresql-migrations: # This container will apply the migrations continously
+    container_name: mfat-db-postgresql-migrations
+    labels:
+      - maintainer="Jojo Calabra"
+    image: migrate/migrate
     volumes:
       # Changes to the migration files in this directory will trigger the migration process
-      - ./src/db/migrations:/migrations
-    command: sh -c 'while ! nc -z db 64298; do sleep 1; done; migrate -path=/migrations/ -database postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:64298/${POSTGRES_DB} up'
+      - ./src/db_postgresql/migrations:/migrations:ro
+    command: sh -c 'while ! nc -z db-postgresql ${DB_POSTGRESQL_PORT_DOCKER}; do sleep 1; done; migrate -path=/migrations/ -database postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db-postgresql:${DB_POSTGRESQL_PORT_DOCKER}/${POSTGRES_DB} up'
+    stop_grace_period: 250ms
     depends_on:
-      - postgresql-db
+      - db-postgresql
 
+  vue3-app:
+    container_name: mfat-vue3-app
+    build:
+      context: src/app_vue3
+      dockerfile: Dockerfile.dev
+    env_file:
+      - .env # CREDENTAILS FOR INTERNAL PORTS, etc.
+    ports:
+      # Ports are loaded from the .env. If no port was specified, default values are used
+      - "${APP_VUE3_PORT_DOCKER:-56123}:${APP_VUE3_PORT_HOST:-8080}"
+    volumes:
+      - ./src/app_vue3:/app:rw
+      - ./src/app_vue3/node_modules:/app/node_modules:rw
+    stop_grace_period: 500ms
+    depends_on:
+      - db-postgresql
+
+  api-server-cpp:
+    container_name: mfat-api-server-cpp
+    build: 
+      context: src/api_server_cpp
+      dockerfile: Dockerfile.dev
+    ports:
+      - "${API_SERVER_CPP_PORT_DOCKER:-53311}:${API_SERVER_CPP_PORT_HOST:-53311}"
+    env_file:
+      - .env # CREDENTAILS FOR DB CONNECTION, etc.
+    volumes:
+      - ./src/api_server_cpp:/src:rw
+    stop_grace_period: 500ms
+    depends_on:
+      - db-postgresql
+    networks:
+      - db-network
+
+  # TODO ATTENTION! implement go server before uncommenting again, otherwise containers will fail to start
+  # api-server-go:
+  #   container_name: mfat-api-server-go
+  #   build:
+  #     context: src/server
+  #     dockerfile: Dockerfile.dev
+  #   ports:
+  #     # Ports are loaded from the .env. If no port was specified, default values are used
+  #     - "${API_SERVER_GO_PORT_DOCKER:-59321}:${API_SERVER_GO_PORT_HOST:-59321}"
+  #   depends_on:
+  #     - db-postgresql
+  
   # TODO @isoeli Create a container for the knowledge wiki if needed something like 'outline' will do (which you recommended, right?)
+
+networks:
+  db-network:

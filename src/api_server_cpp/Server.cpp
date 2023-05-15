@@ -24,21 +24,26 @@ Our dependencies are resolved automatically by the CMake build system (as config
 */
 
 #include "crow.h"
+#include <pqxx/pqxx>
 // #include <grpcpp/grpcpp.h>
 // #include <cryptopp/pwdbased.h>
 // #include <cryptopp/sha.h>
 // #include <cryptopp/hex.h>
-// TODO add postgres
-// TODO add redis https://github.com/cpp-redis/cpp_redis
+// TODO add redis https://github.com/cpp-redis/cpp_redis connector
 
-// function stubs for later declaration
-void load_dotenv(const std::string &path);
+// Project libraries
+#include "mfat.h"
 
 int main()
 {
-  load_dotenv("./.env"); // Load environment variables from .env file
+  mfat::load_dotenv(".env"); // Load environment variables from .env file
 
-  // TODO open postgres DB connection
+  int port = std::stoi(std::getenv("API_SERVER_CPP_PORT_DOCKER")); // Get port from environment variable and parse to int
+  if (port < 0 || port > 65535)                                    // Check if port is in valid range
+  {
+    std::cerr << "Invalid port number: " << port << std::endl;
+    return 1; // abort the server launch immediately
+  }
 
   crow::SimpleApp app; // Create new server instance
 
@@ -51,23 +56,56 @@ int main()
 
   // TODO Implement endpoints as specified in API reference (check the wiki, create issues)
 
-  app.port(3000).multithreaded().run(); // Run the server on port 3000 and use multithreading
+  CROW_ROUTE(app, "/db-test/<int>") // TODO remove db test dummy Endpoint after container testing
+  ([&](int id) -> crow::response    // I've added return type here to specify that we're returning a crow::response
+   {
+    crow::json::wvalue x;
+
+    try
+    {
+      // Initialize database connection
+      // Using sprintf and c-style char buffer. Consider using safer methods to avoid buffer overflow.
+      char connectionCredentials[256];
+      sprintf(connectionCredentials, "dbname=%s user=%s password=%s host=db-postgresql port=%s",
+        std::getenv("POSTGRES_DB"),
+        std::getenv("POSTGRES_USER"),
+        std::getenv("POSTGRES_PASSWORD"),
+        std::getenv("DB_POSTGRESQL_PORT_DOCKER"));
+
+      std::unique_ptr<pqxx::connection> c(new pqxx::connection(connectionCredentials));
+      
+      mfat::DatabaseConnection db(std::move(c)); // Use the correct namespace
+
+      // Query database
+      pqxx::result res = db.selectIDFromTest(std::to_string(id));
+      
+      // Check if result is empty, if so, return error
+      if (res.empty())
+      {
+        x["error"] = "No data found for given id";
+        return crow::response(404, x);
+      }
+
+      // Extract value from result
+      x["value"] = res[0][0].as<int>(); // adjust according to your table structure
+      return crow::response(x);
+    }
+    catch (const std::exception &e)
+    {
+      // Handle errors
+      x["error"] = e.what();
+      return crow::response(500, x);
+    } });
+
+  try
+  {
+    app.port(port).multithreaded().run(); // Run the server on the specified port and enable multithreading
+  }
+  catch (...)
+  {
+    std::cerr << "Server error while starting server. Shutting down. " << std::endl;
+    return 1; // abort the server launch immediately
+  }
 
   return 0;
-}
-
-void load_dotenv(const std::string &path)
-{
-  std::ifstream file(path);
-  std::string line;
-  while (std::getline(file, line))
-  {
-    size_t pos = line.find('=');
-    if (pos != std::string::npos)
-    {
-      std::string key = line.substr(0, pos);
-      std::string value = line.substr(pos + 1);
-      setenv(key.c_str(), value.c_str(), 1);
-    }
-  }
 }

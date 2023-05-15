@@ -10,10 +10,10 @@
 # cmake . -B src/api_server_cpp/build -DCROW_BUILD_EXAMPLES=OFF -DCROW_BUILD_TESTS=OFF -DCMAKE_BUILD_TYPE=Release
 
 # Debug Build — Generate build files and set the build type
-cmake . -B src/api_server_cpp/build -DCROW_BUILD_EXAMPLES=OFF -DCROW_BUILD_TESTS=OFF -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -DCMAKE_BUILD_TYPE=Debug
+cmake . -B build -DCROW_BUILD_EXAMPLES=OFF -DCROW_BUILD_TESTS=OFF -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -DCMAKE_BUILD_TYPE=Debug
 
 # Build using make
-make -C src/api_server_cpp/build
+make -C build
 
 # Run the server (disable this line if you do not want to run the server each time you build)
-./src/api_server_cpp/build/APIServer
+./build/APIServer
