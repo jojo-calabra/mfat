@@ -41,3 +41,8 @@ doc/UI/.$*
 src/api_server_cpp/build/.env
 # CMake build files
 src/api_server_cpp/build/*
+
+# Build time Credentials
+build/.env
+# CMake build files
+build/*
