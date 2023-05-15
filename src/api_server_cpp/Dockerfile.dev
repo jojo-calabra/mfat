@@ -1,17 +1,17 @@
-# Use the official golang image as a parent image. (https://hub.docker.com/_/golang/)
-FROM cmake:latest
+# Use the gcc 13.1 as a base image
+FROM gcc:13.1
 
-# Add maintainer info
+# Set metadata
 LABEL maintainer="Jojo Calabra"
 
-# Set the working directory.
-WORKDIR /app
+# Set the working directory
+WORKDIR /src
 
-# Copy the source files into the container.
+# Install dependencies
+RUN apt-get update && apt-get install -y --quiet cmake libgtest-dev libboost-test-dev && rm -rf /var/lib/apt/lists/*
+
+# Copy the source code into the container
 COPY . .
 
-# Build the C++ app using cmake
-RUN 
-
-# Run the C++ server executable
-CMD ["./main"]
+# Command to build and run the server when the container is started
+CMD cmake . -B ./build && make -C ./build && ./build/APIServer
