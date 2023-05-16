@@ -1,6 +1,6 @@
 -- country table and fields
 CREATE TABLE test (
-    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    id SERIAL PRIMARY KEY,
     value INTEGER NOT NULL
 );
 

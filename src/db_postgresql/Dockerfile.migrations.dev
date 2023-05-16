@@ -1,0 +1,9 @@
+FROM postgres:latest
+
+RUN apt-get update && apt-get install -y netcat curl && \
+    curl -L https://github.com/golang-migrate/migrate/releases/download/v4.14.1/migrate.linux-amd64.tar.gz | tar xvz && \
+    mv migrate.linux-amd64 /usr/bin/migrate && \
+    chmod +x /usr/bin/migrate
+
+CMD sh -c "while ! nc -z mfat-db-postgresql ${DB_POSTGRESQL_PORT_DOCKER}; do sleep 1; done; \
+migrate -path /migrations -database postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${DB_POSTGRESQL_PORT_DOCKER}/${POSTGRES_DB}?sslmode=disable up 1"
