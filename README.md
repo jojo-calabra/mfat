@@ -1,5 +1,7 @@
 ![MFAT Logo](https://github.com/jojo-calabra/mfat/blob/main/doc/Branding/Logo/png/mfat-high-resolution-logo-black-on-transparent-background.png)
 
+# MFAT — My Friend and Teacher
+
 MFAT is a free & open-source (FOSS) application, designed to make learning more entertaining and effective.
 
 It was created out of a struggle to prepare for our final exams properly while getting feedback on our performance and hints about where we could improve, without totally hoging all of the schools/teachers resources.
