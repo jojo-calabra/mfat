@@ -43,14 +43,6 @@ In simple terms this program lets you take training drills and generates detaile
   <a href=""><img src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white"></a>
 <!--   <a href=""><img src="https://img.shields.io/badge/threejs-black?style=for-the-badge&logo=three.js&logoColor=white"></a> -->
 </p>
-  
-  
-# Development Schedule (Estimates)
-
-IMPORTANT — THIS PROGRAM IS STILL IN A VERY EARLY STAGE OF DEVELOPMENT. PLEASE LET US KNOW ABOUT ANY BUGS OR MISSING FEATURES THAT YOU WOULD LIKE TO BE ADDED, IN OUR [ISSUES](https://github.com/jojo-calabra/mfat/issues) PAGE.
-
-![Gantt Chart with Work Breakdown Structure](https://github.com/jojo-calabra/mfat/blob/main/Images/MFAT%20Gantt%20Chart%20with%20work%20breakdown%20structure.pdf.png)
-
 
 # Core Principles
 
