@@ -46,3 +46,5 @@ src/api_server_cpp/build/*
 build/.env
 # CMake build files
 build/*
+# Postgres data (volume)
+src/db_postgresql/postgres_data/*
