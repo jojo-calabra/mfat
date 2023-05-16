@@ -45,6 +45,11 @@ int main()
     return 1; // abort the server launch immediately
   }
 
+  // TODO set loglevel
+
+  // Create a db connection pool with 10 connections
+  mfat::ConnectionPool pool(10);
+
   crow::SimpleApp app; // Create new server instance
 
   CROW_ROUTE(app, "/helloworld") // TODO remove hello world dummy Endpoint after container testing
@@ -63,32 +68,33 @@ int main()
 
     try
     {
-      // Initialize database connection
-      // Using sprintf and c-style char buffer. Consider using safer methods to avoid buffer overflow.
-      char connectionCredentials[256];
-      sprintf(connectionCredentials, "dbname=%s user=%s password=%s host=db-postgresql port=%s",
-        std::getenv("POSTGRES_DB"),
-        std::getenv("POSTGRES_USER"),
-        std::getenv("POSTGRES_PASSWORD"),
-        std::getenv("DB_POSTGRESQL_PORT_DOCKER"));
 
-      std::unique_ptr<pqxx::connection> c(new pqxx::connection(connectionCredentials));
-      
-      mfat::DatabaseConnection db(std::move(c)); // Use the correct namespace
+      CROW_LOG_INFO << "Connecting to database... "; //send a crow log message
 
-      // Query database
-      pqxx::result res = db.selectIDFromTest(std::to_string(id));
-      
-      // Check if result is empty, if so, return error
+      // Get a connection from the pool
+      std::unique_ptr<mfat::DatabaseConnection> db = pool.getConnection();
+
+      CROW_LOG_INFO << "Query selectIDFromTest... "; //send a crow log message
+
+      // Use the connection
+      pqxx::result res = db->selectIDFromTest(std::to_string(id));
+
+      CROW_LOG_INFO << "Returning connection... "; //send a crow log message
+
+      // Return the connection to the pool
+      pool.returnConnection(std::move(db));
+
+      // Check if result is empty, if so, return not found error
       if (res.empty())
       {
         x["error"] = "No data found for given id";
-        return crow::response(404, x);
+        return crow::response(404, x); // Send not found response
       }
 
       // Extract value from result
-      x["value"] = res[0][0].as<int>(); // adjust according to your table structure
-      return crow::response(x);
+      x["value"] = res[0][0].as<int>(); // select value from resultset
+
+      return crow::response(x); // Send response
     }
     catch (const std::exception &e)
     {
